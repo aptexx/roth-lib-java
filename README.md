@@ -1,13 +1,21 @@
 # roth-lib-java
 
-# deployment and testing steps:
+# Build, deployment, and testing steps:
 
-Run the below command to create a new snapshot using incremental semantic versioning (MAJOR.MINOR.PATCH).
+`cd ~/<workspace>/roth-lib-java/roth-lib-java-pom`
+
+then run:
+
+`mvn clean install -DskipTests`
+
+Verify it builds with no errors
+
+Run the below command to create a new snapshot using semantic versioning (MAJOR.MINOR.PATCH).
 - Major: Breaking change
 - Minor: Backward-compatible feature additions
 - Patch: Backward-compatible bug fixes
 
-`mvn version: set -DnewVersion=2.0.1-SNAPSHOT`
+`mvn version: set -DnewVersion=2.X.X-SNAPSHOT`
  
 
 then manually upload the artifacts to the corresponding dirs on framework sever (54.70.119.57) /opt/nginx/home/roth/lib/... etc 
