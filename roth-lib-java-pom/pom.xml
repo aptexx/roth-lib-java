@@ -4,11 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>roth.lib.java</groupId>
 	<artifactId>roth-lib-java-pom</artifactId>
-	<version>${global.version}</version>
+	<version>2.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<global.version>2.0.0-SNAPSHOT</global.version>
 		<jetty.version>9.4.56.v20240826</jetty.version>
 	</properties>
 	<scm>
@@ -141,7 +140,7 @@
 	<distributionManagement>
 		<repository>
 			<id>roth-dist</id>
-			<url>scp://framework.aptx.cm/opt/nginx/home/</url>
+			<url>scp://framework.aptx.cm/opt/nginx/home</url>
 		</repository>
 	</distributionManagement>
 </project>
