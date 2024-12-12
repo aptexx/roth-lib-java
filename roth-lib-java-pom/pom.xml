@@ -139,8 +139,10 @@
 	</build>
 	<distributionManagement>
 		<repository>
-			<id>roth-dist</id>
-			<url>scp://framework.aptx.cm/opt/nginx/home</url>
+			<id>roth-dist-snapshot</id>
+<!--			<url>file:///Users/<user home>/tmp</url>-->
+<!--			Changed to ip address due to Cloudflare changes not allowing port 22 open -->
+			<url>scp://54.70.119.57/opt/nginx/home</url>
 		</repository>
 	</distributionManagement>
 </project>

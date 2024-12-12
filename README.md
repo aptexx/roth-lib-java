@@ -31,17 +31,34 @@ then publish your snapshot to the server by running
 
 `mvn clean install -DskipTests`
 
-This should work, but my user doesn't have permissions to create dirs and our current repo is on NGINX which
-isn't fully maven compatible, and appears isn't storing snapshots in snapshot folders.  In the past it appears
-that users were given the ability to log in as root to get these perms, but that is no longer allowed under Inhabit
-policy:
+This should work now that we have group access to modify the repo servers, but the first time I did a deploy mvn hung up
+trying to generate meta data so I implemented the workaround below:
 
 `mvn clean deploy -DskipTests`
 
 *Workaround:
-go to `/tmp` on the framework server and mkdir `X.X.X-SNAPSHOT` then on your local machine clean old snapshot versions from
-``/<user_home>/.m2/repository/roth/lib/java/roth-lib-java`` then scp `scp -r -P 55555 user_name@54.70.119.57:/tmp/` that dir to the `/tmp` folder on framework
-then ssh into framework and use `sudo -i` to copy your `X.X.X-SNAPSHOT` folder from `/tmp` to the corresponding module folder located `/opt/nginx/home/roth/lib/java`
+Modify your pom.xml under roth roth-lib-java-pom's distributionManagement/repository section to point to your local /tmp
+directory.  Then you can `scp -i ~/.ssh/id_rsa -r /tmp/roth/lib/java user-name@54.70.119.57:/tmp` to upload your local repo
+to the framework server.  Then you need to copy `X.X.X-SNAPSHOT` folders from framework's /tmp to the repo at
+`/opt/nginx/home/java`.  You can use this script as a starting place.
+
+```
+cp -r /tmp/java/roth-lib-java/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java/ && 
+cp -r /tmp/java/roth-lib-java-api/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-api/ &&  
+cp -r /tmp/java/roth-lib-java-db/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-db/ && 
+cp -r /tmp/java/roth-lib-java-email/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-email/ && 
+cp -r /tmp/java/roth-lib-java-framework/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-framework/ &&  
+cp -r /tmp/ava/roth-lib-java-ftp/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-ftp/ &&  
+cp -r /tmp/java/roth-lib-java-http/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-http/ && 
+cp -r /tmp/java/roth-lib-java-jdbc/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-jdbc/ &&  
+cp -r /tmp/java/roth-lib-java-jdbc-mysql/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-jdbc-mysql/ && 
+cp -r /tmp/java/roth-lib-java-pom/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-pom/ && 
+cp -r /tmp/java/roth-lib-java-service/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-service/ &&  
+cp -r /tmp/java/roth-lib-java-ssh/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-ssh/ &&  
+cp -r /tmp/java/roth-lib-java-template/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-template/ && 
+cp -r /tmp/java/roth-lib-java-web/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-web/ &&  
+cp -r /tmp/java/roth-lib-java-web-plugin/2.0.1-SNAPSHOT /opt/nginx/home/roth/lib/java/roth-lib-java-web-plugin/  
+```
 
 **Current mvn 3.9.9 does not accept keys created with OPENSSH for use in the mvn deploy step.  If you have a newer key
 generated with OPENSSH you will need to convert it to PEM style to get it to work with MVN ```ssh-keygen -p -m PEM -f id_rsa```
