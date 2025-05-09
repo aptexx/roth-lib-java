@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<global.version>2.0.0-SNAPSHOT</global.version>
+		<global.version>3.1.1-SNAPSHOT</global.version>
 		<jetty.version>9.4.56.v20240826</jetty.version>
 	</properties>
 	<scm>
@@ -95,6 +95,14 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                <skip>true</skip>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -133,15 +141,15 @@
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>3.2.0</version>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>3.5.3</version>
 			</extension>
 		</extensions>
 	</build>
 	<distributionManagement>
 		<repository>
 			<id>roth-dist</id>
-			<url>scp://framework.aptx.cm/opt/nginx/home/</url>
+			<url>scpexe://framework.aptx.cm/opt/nginx/home/</url>
 		</repository>
 	</distributionManagement>
 </project>
