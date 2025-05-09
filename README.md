@@ -15,7 +15,7 @@ Run the below command to create a new snapshot using semantic versioning (MAJOR.
 - Minor: Backward-compatible feature additions
 - Patch: Backward-compatible bug fixes
 
-`mvn version: set -DnewVersion=2.X.X-SNAPSHOT`
+`mvn version: set -DnewVersion=3.1.0-SNAPSHOT`
  
 
 then manually upload the artifacts to the corresponding dirs on framework sever (54.70.119.57) /opt/nginx/home/roth/lib/... etc 
@@ -32,18 +32,18 @@ ex:
 <dependency>
     <groupId>roth.lib.java</groupId>
     <artifactId>roth-lib-java-framework</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <type>pom</type>
 </dependency>
 <dependency>
     <groupId>roth.lib.java</groupId>
     <artifactId>roth-lib-java-jdbc-mysql</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
 </dependency>
 <dependency>
     <groupId>roth.lib.java</groupId>
     <artifactId>roth-lib-java-api</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
 </dependency>
 ```
 
