@@ -183,4 +183,4 @@ roth.lib.js.template.Template.prototype.render = function(source, scope, thisArg
 
 
 
-roth.lib.js.template.version = "3.1.1-SNAPSHOT";
+roth.lib.js.template.version = "3.1.3-SNAPSHOT";
